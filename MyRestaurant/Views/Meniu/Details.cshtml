@@ -1,0 +1,29 @@
+﻿@model MyRestaurant.Models.MeniuClient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>MeniuClient</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Meniu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Meniu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ingrediente)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ingrediente)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

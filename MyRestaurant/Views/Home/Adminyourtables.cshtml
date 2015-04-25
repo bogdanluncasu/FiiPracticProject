@@ -1,0 +1,121 @@
+﻿@model IEnumerable<MyRestaurant.Models.Client>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+    <title>Rezervari</title>
+    <meta charset="utf-8">
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
+    <!--[if IE 6]>
+        <link href="css/ie6.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+    <!--[if IE 7]>
+        <link href="css/ie7.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+</head>
+<body>
+    
+        <div id="page">
+
+            <div id="body">
+               
+                
+
+                   
+                            <p>
+                               
+                           
+                            <p>
+
+                                <center>
+
+                                    <font size="3" color="blue">
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    Id
+                                                </th>
+                                                <th>
+                                                    Chelner
+                                                </th>
+                                                <th>
+                                                    Masa
+                                                </th>
+                                                <th>
+                                                    Nume
+                                                </th>
+                                                <th>
+                                                    Phone number
+                                                </th>
+                                                <th>
+                                                    Comanda
+                                                </th>
+
+                                                <th></th>
+                                            </tr>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Id)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Chelner.ChelnerName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Masa)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FullName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.MeniuClient.Meniu)
+                                                    </td>
+                                                    <td>
+
+                                                        @Html.ActionLink("Delete", "Deleteatable", new {id = item.Id})|
+                                                        @Html.ActionLink("Comanda", "AddToTable", new { id = item.Id })
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </table>
+                                    </font>
+
+                                </center>
+
+                            </p>
+                          
+
+
+                </div>
+            </div>
+            <div id="footer">
+                <ul>
+                    
+
+                    <li class="last">
+                        <span> &copy; copyright 2015 &copy;. All rights reserved.</span>
+                    </li>
+                </ul>
+            </div>
+        
+   
+</body>
+</html>
+
+
+

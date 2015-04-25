@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MyRestaurant.Models.MeniuClient>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Meniu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ingrediente)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meniu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingrediente)
+            </td>
+            <td>
+                @Html.ActionLink("AddToTable", "AddToTable", new { id = item.Id }) |
+               
+            </td>
+        </tr>
+    }
+
+</table>

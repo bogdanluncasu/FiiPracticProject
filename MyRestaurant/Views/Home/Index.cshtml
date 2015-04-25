@@ -1,0 +1,139 @@
+﻿@model MyRestaurant.Models.Client
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<style type="text/css">
+   .styled-button {
+	background: #00A0D1;
+	background: -moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
+	background: -webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background: -o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background: -ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background: linear-gradient(#00A0D1 0%,#008DB8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+	padding:8px 20px;
+	color:#cfebf3;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:13px;
+	border-radius:40px;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+	border:1px solid #095B7E
+}    
+</style>
+
+
+            
+
+
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+    <title>Rezervari</title>
+    <meta charset="utf-8">
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
+    <!--[if IE 6]>
+        <link href="css/ie6.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+    <!--[if IE 7]>
+        <link href="css/ie7.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+</head>
+<body>
+    <div id="background">
+        <div id="page">
+            
+            <div id="body">
+                <div class="slider">
+                    <ul>
+                        
+                        <li>
+                           <img src="~/Content/images/barbeque.jpg" width="940" height="331" alt="Steak House" title="Steak House">
+                        </li>
+                    </ul>
+                </div>
+                <ul id="featured">
+                    <li class="first">
+                        <img src="~/Content/images/food-menu.jpg" alt="steak house" title="steak house">
+                    <li>
+                    <li>
+                       <img src="~/Content/images/beer.jpg" alt="steak house" title="steak house">
+                    <li>
+                </ul>
+                <div class="section">
+                  
+                </div>
+                <div id="content">
+                    
+                        <ul>
+                            <li>
+                                 <p>
+                                    <center>
+                                <p style="font-size: 30px;">Rezervari online</p>
+                                <p>
+                                    @if (TempData["Message"] != null)
+                                    {
+                                        <div>
+                                            <center> <button type="button">@TempData["Message"]</button></center>
+                                        </div>
+                                    }
+                                </p>
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    <fieldset>
+
+
+                                        <div class="editor-label">
+                                            <font size="3" color="blue">   @Html.LabelFor(model => model.FullName, "Nume si Prenume")</font>
+                                        </div><br />
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.FullName)
+                                            @Html.ValidationMessageFor(model => model.FullName)
+                                        </div>
+                                        <br />
+                                        <div class="editor-label">
+                                            <font size="3" color="blue"> @Html.LabelFor(model => model.PhoneNumber, "Numar de telefon")</font>
+                                        </div><br />
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.PhoneNumber)
+                                            @Html.ValidationMessageFor(model => model.PhoneNumber)
+                                        </div>
+                                        <br />
+                                        <p>
+                                            <input type="submit" align="center" class="styled-button" value="Create" />
+                                        </p>
+                                    </fieldset>
+                                }
+                                </center>
+
+                                </p>
+                            </li>
+                           
+                        </ul>
+                   
+                   
+                </div>
+            </div>
+            <div id="footer">
+                <ul>
+                    <li class="first">
+                        
+                    </li>
+                    
+                    <li class="last">
+                        <span> &copy; copyright 2015 &copy;. All rights reserved.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

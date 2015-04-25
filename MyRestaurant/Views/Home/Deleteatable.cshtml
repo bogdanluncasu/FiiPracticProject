@@ -1,0 +1,54 @@
+﻿@model MyRestaurant.Models.Client
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Client</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Masa)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Masa)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MeniuClient.Meniu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MeniuClient.Meniu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Chelner.ChelnerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Chelner.ChelnerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FullName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Adminyourtables")
+    </p>
+}

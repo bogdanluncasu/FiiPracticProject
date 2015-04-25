@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MyRestaurantDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Bucatarie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ChelnerId" Type="int" Nullable="false" />
+          <Property Name="MasaNr" Type="int" Nullable="false" />
+          <Property Name="Comanda" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chelner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ChelnerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comanda" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Masa" Type="int" Nullable="false" />
+          <Property Name="Comanda" Type="int" Nullable="false" />
+          <Property Name="ChelnerNr" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingrediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ingredient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cantitate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeniuClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Meniu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ingrediente" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="chelnerid">
+          <End Role="Chelner" Type="Self.Chelner" Multiplicity="1" />
+          <End Role="Bucatarie" Type="Self.Bucatarie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chelner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bucatarie">
+              <PropertyRef Name="ChelnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="chelnernr">
+          <End Role="Chelner" Type="Self.Chelner" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chelner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="ChelnerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comanda">
+          <End Role="MeniuClient" Type="Self.MeniuClient" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeniuClient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Comanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyRestaurantDatabaseModelStoreContainer">
+          <EntitySet Name="Bucatarie" EntityType="Self.Bucatarie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chelner" EntityType="Self.Chelner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingrediente" EntityType="Self.Ingrediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeniuClient" EntityType="Self.MeniuClient" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="chelnerid" Association="Self.chelnerid">
+            <End Role="Chelner" EntitySet="Chelner" />
+            <End Role="Bucatarie" EntitySet="Bucatarie" />
+          </AssociationSet>
+          <AssociationSet Name="chelnernr" Association="Self.chelnernr">
+            <End Role="Chelner" EntitySet="Chelner" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="comanda" Association="Self.comanda">
+            <End Role="MeniuClient" EntitySet="MeniuClient" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyRestaurantDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Bucatarie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ChelnerId" Type="Int32" Nullable="false" />
+          <Property Name="MasaNr" Type="Int32" Nullable="false" />
+          <Property Name="Comanda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Chelner" Relationship="Self.chelnerid" FromRole="Bucatarie" ToRole="Chelner" />
+        </EntityType>
+        <EntityType Name="Chelner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ChelnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comanda" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bucataries" Relationship="Self.chelnerid" FromRole="Chelner" ToRole="Bucatarie" />
+          <NavigationProperty Name="Clients" Relationship="Self.chelnernr" FromRole="Chelner" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Masa" Type="Int32" Nullable="false" />
+          <Property Name="Comanda" Type="Int32" Nullable="false" />
+          <Property Name="ChelnerNr" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chelner" Relationship="Self.chelnernr" FromRole="Client" ToRole="Chelner" />
+          <NavigationProperty Name="MeniuClient" Relationship="Self.comanda" FromRole="Client" ToRole="MeniuClient" />
+        </EntityType>
+        <EntityType Name="Ingrediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ingredient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantitate" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeniuClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Meniu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ingrediente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.comanda" FromRole="MeniuClient" ToRole="Client" />
+        </EntityType>
+        <Association Name="chelnerid">
+          <End Role="Chelner" Type="Self.Chelner" Multiplicity="1" />
+          <End Role="Bucatarie" Type="Self.Bucatarie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chelner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bucatarie">
+              <PropertyRef Name="ChelnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="chelnernr">
+          <End Role="Chelner" Type="Self.Chelner" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chelner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="ChelnerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comanda">
+          <End Role="MeniuClient" Type="Self.MeniuClient" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeniuClient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Comanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyRestaurantDatabaseContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bucataries" EntityType="Self.Bucatarie" />
+          <EntitySet Name="Chelners" EntityType="Self.Chelner" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Ingredientes" EntityType="Self.Ingrediente" />
+          <EntitySet Name="MeniuClients" EntityType="Self.MeniuClient" />
+          <AssociationSet Name="chelnerid" Association="Self.chelnerid">
+            <End Role="Chelner" EntitySet="Chelners" />
+            <End Role="Bucatarie" EntitySet="Bucataries" />
+          </AssociationSet>
+          <AssociationSet Name="chelnernr" Association="Self.chelnernr">
+            <End Role="Chelner" EntitySet="Chelners" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="comanda" Association="Self.comanda">
+            <End Role="MeniuClient" EntitySet="MeniuClients" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyRestaurantDatabaseModelStoreContainer" CdmEntityContainer="MyRestaurantDatabaseContext">
+          <EntitySetMapping Name="Bucataries">
+            <EntityTypeMapping TypeName="MyRestaurantDatabaseModel.Bucatarie">
+              <MappingFragment StoreEntitySet="Bucatarie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChelnerId" ColumnName="ChelnerId" />
+                <ScalarProperty Name="MasaNr" ColumnName="MasaNr" />
+                <ScalarProperty Name="Comanda" ColumnName="Comanda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chelners">
+            <EntityTypeMapping TypeName="MyRestaurantDatabaseModel.Chelner">
+              <MappingFragment StoreEntitySet="Chelner">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChelnerName" ColumnName="ChelnerName" />
+                <ScalarProperty Name="Comanda" ColumnName="Comanda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="MyRestaurantDatabaseModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Masa" ColumnName="Masa" />
+                <ScalarProperty Name="Comanda" ColumnName="Comanda" />
+                <ScalarProperty Name="ChelnerNr" ColumnName="ChelnerNr" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredientes">
+            <EntityTypeMapping TypeName="MyRestaurantDatabaseModel.Ingrediente">
+              <MappingFragment StoreEntitySet="Ingrediente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ingredient" ColumnName="Ingredient" />
+                <ScalarProperty Name="Cantitate" ColumnName="Cantitate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeniuClients">
+            <EntityTypeMapping TypeName="MyRestaurantDatabaseModel.MeniuClient">
+              <MappingFragment StoreEntitySet="MeniuClient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Meniu" ColumnName="Meniu" />
+                <ScalarProperty Name="Ingrediente" ColumnName="Ingrediente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
